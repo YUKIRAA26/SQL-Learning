@@ -1,0 +1,76 @@
+CREATE TABLE students (
+	studentID INT PRIMARY KEY,
+    name VARCHAR(50),
+    age INT,
+    section VARCHAR(50)
+    )
+   
+INSERT INTO students(studentID,name,age,section)
+VALUES 
+(101,'jacob',17,'PROG-A'),
+(102,'justin',21,'BSIS'),
+(103,'jasmine',15,'SINGKIL'),
+(104,'jaireen', 7,'FAITFUL');
+
+CREATE TABLE grades(
+	gradeID INT PRIMARY KEY,
+    studentID INT,
+    subjectID INT,
+    grade DECIMAL(4, 2)
+    )
+
+INSERT INTO grades(gradeID, studentID, subjectID,grade)
+VALUES 
+(1,101,10,90.21),
+(2,102,11,67.23),
+(3,103,12,89.67),
+(4,104,13,91.90);
+
+CREATE TABLE subject(
+	subjectID INT PRIMARY KEY,
+    subjectName VARCHAR(50)
+    )
+ALTER TABLE grades
+ADD FOREIGN KEY (studentID) REFERENCES students(studentID);
+
+
+INSERT INTO subject(subjectID, subjectName)
+VALUE 
+(10,'MATH'),
+(11,'SCIENCE'),
+(12,'PROGRAMMING'),
+(13,'DANCING');
+
+ALTER TABLE grades
+ADD FOREIGN KEY (subjectID) REFERENCES subject(subjectID);
+
+SELECT * FROM students;
+SELECT * FROM students
+WHERE studentID BETWEEN 101 AND 105;
+
+SELECT * FROM students
+WHERE name REGEXP '^j';
+
+SELECT * FROM subject
+
+SELECT * FROM grades
+
+SELECT * FROM students
+JOIN grades ON students.studentID = grades.studentID
+JOIN subject ON grades.subjectID = subject.subjectID;
+
+SELECT AVG(grade)
+FROM grades;
+
+SELECT MAX(grade)
+FROM grades;
+
+SELECT * FROM students
+JOIN grades ON students.studentID = grades.studentID
+WHERE grade > 90
+ORDER BY grade DESC;
+
+SELECT COUNT(*)
+FROM subject
+
+
