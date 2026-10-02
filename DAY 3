@@ -1,0 +1,23 @@
+-- 1. JOIN students, grades, and subjects
+SELECT * FROM students s
+JOIN grades g ON g.studentID = s.studentID
+JOIN subject s ON s.subjectID = g.subjectID;
+
+
+-- 2. Insert students into subjects
+INSERT INTO grades (studentID, subjectID)
+VALUES
+(1, 101),
+(1, 102);
+
+
+-- 3. Count students in subject 10
+SELECT COUNT(studentID)
+WHERE subjectID = 10;
+
+
+-- 4. Show students taking subject 12
+SELECT * FROM students s
+JOIN grades g ON g.studentID = s.studentID
+JOIN subject sub ON sub.subjectID = g.subjectID
+WHERE sub.subjectID = 12;
