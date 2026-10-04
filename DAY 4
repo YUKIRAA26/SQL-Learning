@@ -1,0 +1,144 @@
+```sql
+-- ============================================
+-- SQL DAY 4
+-- JOIN, SELF JOIN, UNION, USING
+-- ============================================
+
+
+-- ============================================
+-- 1. INNER JOIN
+-- ============================================
+
+SELECT students.name, grades.grade
+FROM students
+JOIN grades
+ON students.studentID = grades.studentID;
+
+
+-- Using table aliases
+
+SELECT s.name, g.grade
+FROM students s
+JOIN grades g
+ON s.studentID = g.studentID;
+
+
+-- Exclude NULL grades
+
+SELECT s.name, g.grade
+FROM students s
+JOIN grades g
+ON s.studentID = g.studentID
+WHERE g.grade IS NOT NULL;
+
+
+-- ============================================
+-- 2. LEFT JOIN
+-- ============================================
+
+-- Shows all students, even if they don't
+-- have a matching record in grades.
+
+SELECT s.name, g.grade
+FROM students s
+LEFT JOIN grades g
+ON s.studentID = g.studentID;
+
+
+-- ============================================
+-- 3. RIGHT JOIN
+-- ============================================
+
+-- Shows all grades, even if they don't
+-- have a matching student.
+
+SELECT s.name, g.grade
+FROM students s
+RIGHT JOIN grades g
+ON s.studentID = g.studentID;
+
+
+-- ============================================
+-- 4. SELF JOIN
+-- ============================================
+
+-- Joining the students table to itself.
+-- "a" represents the first copy.
+-- "b" represents the second copy.
+
+SELECT
+    a.name,
+    a.besfriend,
+    b.besfriend AS theirFriend
+FROM students a
+LEFT JOIN students b
+ON a.besfriend = b.name;
+
+
+-- ============================================
+-- 5. UNION
+-- ============================================
+
+-- Combines the results of two SELECT statements
+-- and removes duplicate rows.
+
+SELECT name
+FROM students
+
+UNION
+
+SELECT name
+FROM teachers;
+
+
+-- ============================================
+-- 6. UNION ALL
+-- ============================================
+
+-- Combines the results but keeps duplicates.
+
+SELECT name
+FROM students
+
+UNION ALL
+
+SELECT name
+FROM teachers;
+
+
+-- ============================================
+-- 7. UNION USING SELECT *
+-- ============================================
+
+-- Only works when both SELECT statements
+-- return the same number of compatible columns.
+
+SELECT *
+FROM students
+
+UNION
+
+SELECT *
+FROM subject;
+
+
+-- ============================================
+-- 8. USING CLAUSE
+-- ============================================
+
+-- USING is shorthand for ON when the joining
+-- column has the same name in both tables.
+
+SELECT *
+FROM students
+JOIN grades
+USING (studentID);
+
+
+-- Equivalent to:
+
+SELECT *
+FROM students
+JOIN grades
+ON students.studentID = grades.studentID;
+```
