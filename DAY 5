@@ -1,0 +1,16 @@
+package jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class JDBCExample {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		String username = "root";
+		String password = "yukira12345"; 
+		
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb",username , password);
+		System.out.println("connection created");
+	}
+}
