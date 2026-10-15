@@ -1,0 +1,36 @@
+
+SELECT
+    o.quantity AS 'Quantity Sold',
+    p.product_name,
+    p.price * o.quantity AS 'revenue'
+FROM order_items o
+JOIN product p
+    ON o.product_id = p.product_id
+GROUP BY p.product_name;
+
+
+
+SELECT
+    SUM(o.quantity) AS 'Quantity Sold',
+    p.product_name,
+    SUM(p.price * o.quantity) AS 'revenue'
+FROM order_items o
+JOIN product p
+    ON o.product_id = p.product_id
+JOIN orders os
+    ON o.order_id = os.order_id;
+GROUP BY p.product_name, p.product_id;
+
+
+
+SELECT
+    SUM(o.quantity) AS 'Quantity Sold',
+    p.product_name,
+    SUM(p.price * o.quantity) AS 'revenue',
+    COUNT(os.order_id) AS 'total orders'
+FROM order_items o
+JOIN product p
+    ON o.product_id = p.product_id
+JOIN orders os
+    ON o.order_id = os.order_id
+GROUP BY p.product_name, p.product_id;
